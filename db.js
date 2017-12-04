@@ -1,5 +1,6 @@
 import Sequelize from "sequelize";
 import _ from "lodash";
+import Faker from "Faker";
 
 var config = require("./config.js")
 console.log(config)
@@ -74,7 +75,14 @@ const User = Conn.define("user", {
 Subscriber.belongsTo(User);
 
 Conn.sync({force: true}).then(()=> {
-
+    _.times(10, ()=>{
+        return User.create({
+            firstName: Faker.name.firstName(),
+            lastName: Faker.name.lastName(),
+            email: Faker.internet.email(),
+            password: "bla"
+        });
+    });
 });
 
 export default Conn;
