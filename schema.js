@@ -3,69 +3,43 @@ import {
     GraphQLSchema,
     GraphQLInt,
     GraphQLString,
-    GraphQLList
+    GraphQLList,
+    GraphQLNonNull
 } from "graphql";
+
 import Db from "./db";
 
+import AddUser from "./src/UseCases/user/AddUser"
+import GetUsers from "./src/UseCases/user/GetUsers.js"
 
-const User = new GraphQLObjectType({
-    name: "User", 
-    description: "This representes a subscribed user.",
-    fields: () => {
-        return {
-            id: {
-                type: GraphQLInt,
-                resolve(person){
-                    return person.id;
-                }
-            },
-            firstName: {
-                type: GraphQLString,
-                resolve(person){
-                    return person.firstName;
-                }
-            },
-            lastName: {
-                type: GraphQLString,
-                resolve(person){
-                    return person.lastName;
-                }
-            },
-            email: {
-                type: GraphQLString,
-                resolve(person){
-                    return person.email;
-                }
-            },
-        }
-    }
-});
+import AddSubscriber from "./src/UseCases/subscriber/AddSubscriber.js"
+import GetSubscribers from "./src/UseCases/subscriber/GetSubscribers.js"
 
 const Query = new GraphQLObjectType({
     name: "Query",
     description: "This is the root query",
     fields: () => {
         return {
-            users: {
-                type: new GraphQLList(User),
-                args: {
-                    id: {
-                        type: GraphQLInt
-                    },
-                    email: {
-                        type: GraphQLString
-                    }
-                },
-                resolve(root, args) {
-                    return Db.models.user.findAll({where: args});
-                }
-            }
+            users: GetUsers,
+            subscribers: GetSubscribers
+        }
+    }
+});
+
+const Mutation = new GraphQLObjectType({
+    name: "Mutation",
+    description: "Creating",
+    fields(){
+        return {
+            addUser: AddUser,
+            addSubscriber: AddSubscriber
         }
     }
 });
 
 const Schema = new GraphQLSchema({
-    query: Query
+    query: Query,
+    mutation: Mutation
 });
 
 export default Schema;
