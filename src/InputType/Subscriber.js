@@ -6,10 +6,13 @@ import {
     GraphQLList,
     GraphQLNonNull
 } from "graphql";
+import Db from "../../db"
 import User from "./User.js"
+import AditionalData from "./SubscriberAditionalData.js"
+import SocioEconomicData from "./SubscriberSocioEconomicData.js"
 
 //Tenho que apenas exportar o schema
-const Subscriber = new GraphQLObjectType({
+export default new GraphQLObjectType({
     name: "Subscriber",
     description: "This representes a User that subscribed to the course.",
     fields: () => {
@@ -61,9 +64,27 @@ const Subscriber = new GraphQLObjectType({
                 resolve(subscriber){
                     return subscriber.getUser();
                 }
+            },
+            aditionalData: {
+                type: AditionalData,
+                resolve(subscriber){
+                    return Db.models.subscriberAditionalData.find({
+                        where: {
+                            subscriberId: subscriber.id
+                        }
+                    })
+                }
+            },
+            socioEconomicData: {
+                type: SocioEconomicData,
+                resolve(subscriber){
+                    return Db.models.subscriberSocioEconomicData.find({
+                        where: {
+                            subscriberId: subscriber.id
+                        }
+                    })
+                }
             }
         }
     }
 });
-
-export default Subscriber

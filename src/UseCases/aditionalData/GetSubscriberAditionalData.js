@@ -4,25 +4,25 @@ import {
     GraphQLInt,
     GraphQLString,
     GraphQLList,
-    GraphQLNonNull,
-    GraphQLOutputType
+    GraphQLNonNull
 } from "graphql";
 import Db from "../../../db.js";
-import Subscriber from "../../InputType/Subscriber.js"
+import SubscriberAditionalData from "../../InputType/SubscriberAditionalData.js"
 
-export default {
-    type: new GraphQLList(Subscriber),
-    name: "GetSubscribers",
+const GetSubscriberAditionalData = {
+    type: new GraphQLList(SubscriberAditionalData),
     description: "Retorna a lista de inscritos.",
     args: {
         id: {
             type: GraphQLInt
         },
-        cpf: {
+        userId: {
             type: GraphQLInt
         }                    
     },
     resolve(root, args){
         return Db.models.subscriber.findAll({where: args});
     }
-};
+}
+
+export default GetSubscriberAditionalData;

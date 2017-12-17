@@ -15,13 +15,21 @@ import GetUsers from "./src/UseCases/user/GetUsers.js"
 import AddSubscriber from "./src/UseCases/subscriber/AddSubscriber.js"
 import GetSubscribers from "./src/UseCases/subscriber/GetSubscribers.js"
 
+import AddSubscriberSocioEconomicData from "./src/UseCases/socioEconomicData/AddSubscriberSocioEconomicData.js"
+import GetSubscriberSocioEconomicData from "./src/UseCases/socioEconomicData/GetSubscriberSocioEconomicData.js"
+
+import AddSubscriberAditionalData from "./src/UseCases/aditionalData/AddSubscriberAditionalData.js"
+import GetSubscriberAditionalData from "./src/UseCases/aditionalData/GetSubscriberAditionalData.js"
+
 const Query = new GraphQLObjectType({
     name: "Query",
     description: "This is the root query",
     fields: () => {
         return {
             users: GetUsers,
-            subscribers: GetSubscribers
+            subscribers: GetSubscribers,
+            subscriberSocioEconomicData: GetSubscriberSocioEconomicData,
+            subscriberAditionalData: GetSubscriberAditionalData
         }
     }
 });
@@ -32,7 +40,10 @@ const Mutation = new GraphQLObjectType({
     fields(){
         return {
             addUser: AddUser,
-            addSubscriber: AddSubscriber
+            addSubscriber: AddSubscriber,
+            addSocioEconomicData: AddSubscriberSocioEconomicData,
+            addAditionalData: AddSubscriberAditionalData
+            
         }
     }
 });

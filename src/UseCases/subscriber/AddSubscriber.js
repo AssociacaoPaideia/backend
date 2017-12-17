@@ -1,5 +1,5 @@
 import {
-    GraphQLObjectType,
+    GraphQLInputObjectType,
     GraphQLSchema,
     GraphQLInt,
     GraphQLString,
@@ -10,16 +10,37 @@ import Db from "../../../db.js";
 import Subscriber from "../../InputType/Subscriber.js"
 
 //Tenho que apenas exportar o schema
-const AddSubscriber = {
-    name: "",
-    description: "",
+export default {
+    name: "addSubscriber",
+    description: "Adds a subscriber",
     type: Subscriber,
     args: {
-
+        birthDate: {
+            type: GraphQLString
+        },
+        birthPlace: {
+            type: GraphQLString
+        },
+        phone: {
+            type: GraphQLString
+        },
+        citizenCard: {
+            type: GraphQLString
+        }, 
+        cpf: {
+            type: GraphQLInt
+        },
+        rg: {
+            type: GraphQLInt
+        },
+        photo: {
+            type: GraphQLString
+        },
+        userId: {
+            type: GraphQLInt
+        },
     },
     resolver(args){
-        return Db.models.subscriber.findAll({where:args})
+        return Db.models.subscriber.create(args)
     }
-}
-
-export default AddSubscriber
+};
