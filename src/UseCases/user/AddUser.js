@@ -5,6 +5,7 @@ import {
 
 import Db from "../../../db";
 import User from "../../InputType/User.js"
+import MailSender from "../../Application/MailSender"
 
 const AddUser = {
     name: "addUser",
@@ -24,8 +25,11 @@ const AddUser = {
             type: new GraphQLNonNull(GraphQLString)
         }
     },
-    resolver: (args) => {
-        return Db.models.user.create(args);        
+    resolve(_, args){
+        console.log(args)
+        var user = Db.models.user.create(args); 
+        MailSender.sendMail(args["email"]);
+        return user;
     }
 };
 

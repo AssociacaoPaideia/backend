@@ -24,8 +24,10 @@
     "express-graphql": "^0.6.11",
     "faker": "^4.1.0",
     "graphql": "^0.11.7",
+    "jsonwebtoken": "^8.1.0",
     "lodash": "^4.17.4",
     "mysql2": "^1.5.1",
+    "nodemailer": "^4.4.1",
     "sequelize": "^4.25.1"
   },
   "devDependencies": {
