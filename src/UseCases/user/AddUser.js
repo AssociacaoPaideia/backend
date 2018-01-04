@@ -25,7 +25,11 @@ const AddUser = {
             type: new GraphQLNonNull(GraphQLString)
         }
     },
-    resolve(_, args){
+    resolve(_, args, context){
+        console.log(`[context keys  ] - ${Object.keys(context)}`);
+        console.log(`[context header] - ${(context.headers) ? Object.keys(context.headers) : null}`);
+        console.log(`[context header authorizaton] - ${(context.headers && context.headers.authorization) ? context.headers.authorization : null}`);
+    
         console.log(args)
         var user = Db.models.user.create(args); 
         MailSender.sendMail(args["email"]);

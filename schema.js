@@ -11,6 +11,7 @@ import Db from "./db";
 
 import AddUser from "./src/UseCases/user/AddUser"
 import GetUsers from "./src/UseCases/user/GetUsers.js"
+import Authenticate from "./src/UseCases/user/Authenticate.js"
 
 import AddSubscriber from "./src/UseCases/subscriber/AddSubscriber.js"
 import GetSubscribers from "./src/UseCases/subscriber/GetSubscribers.js"
@@ -29,7 +30,8 @@ const Query = new GraphQLObjectType({
             users: GetUsers,
             subscribers: GetSubscribers,
             subscriberSocioEconomicData: GetSubscriberSocioEconomicData,
-            subscriberAditionalData: GetSubscriberAditionalData
+            subscriberAditionalData: GetSubscriberAditionalData,
+            authenticate: Authenticate
         }
     }
 });
