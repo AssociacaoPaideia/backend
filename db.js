@@ -68,14 +68,14 @@ const Subscriber = Conn.define("subscriber", {
         allowNull: false
     }, 
     cpf: {
-        type: Sequelize.BIGINT,
+        type: Sequelize.STRING,
         allowNull: false,
         validate: {
             isNumeric: true
         }
     },
     rg: {
-        type: Sequelize.BIGINT,
+        type: Sequelize.STRING,
         allowNull: false
     },
     photo: {
@@ -86,14 +86,15 @@ const Subscriber = Conn.define("subscriber", {
 
 
 const schoolTypeArgs = [["PUBLIC","PRIVATE"]];
+const schoolCompletion = [["COMPLETE", "INCOMPLETE", "SUPERIOR"]];
 const SubscriberAditionalData = Conn.define("subscriber_aditional_data",{
     scholarDegree: {
         type: Sequelize.STRING,
         allowNull: false,
         validate: {
             isIn: {
-               args:  schoolTypeArgs,
-               msg: "Values must be: " + schoolTypeArgs
+               args:  schoolCompletion,
+               msg: "Values must be: " + schoolCompletion
             }
         }
     },
@@ -116,7 +117,7 @@ const SubscriberAditionalData = Conn.define("subscriber_aditional_data",{
         allowNull: true        
     },
     intendedCourse: {
-        type: Sequelize.BOOLEAN,
+        type: Sequelize.STRING,
         allowNull: false,
     },
     intendedInstitution: {
@@ -125,7 +126,16 @@ const SubscriberAditionalData = Conn.define("subscriber_aditional_data",{
     },
     enemGrade: {
         type: Sequelize.INTEGER,
-        allowNull: true
+        allowNull: true,
+        validate: {
+            isNumeric: true,
+            isInt: true,
+            isValid(value) {
+                if (!(parseInt(value) <= 1000 && parseInt(value) > 0)) {
+                    throw new Error("Nota do enem inválida!")
+                }
+            }
+        }
     }
 });
 

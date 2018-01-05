@@ -4,7 +4,8 @@ import {
     GraphQLInt,
     GraphQLString,
     GraphQLList,
-    GraphQLNonNull
+    GraphQLNonNull,
+    GraphQLBigInt
 } from "graphql";
 import Db from "../../../db.js";
 import Subscriber from "../../InputType/Subscriber.js"
@@ -28,19 +29,19 @@ export default {
             type: GraphQLString
         }, 
         cpf: {
-            type: GraphQLInt
+            type: GraphQLString
         },
         rg: {
-            type: GraphQLInt
+            type: GraphQLString
         },
         photo: {
             type: GraphQLString
         },
         userId: {
-            type: GraphQLInt
+            type: GraphQLString
         },
     },
-    resolver(args){
+    resolve(_, args){
         return Db.models.subscriber.create(args)
     }
 };

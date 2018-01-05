@@ -17,6 +17,12 @@ export default new GraphQLObjectType({
     description: "This representes a User that subscribed to the course.",
     fields: () => {
         return {
+            id: {
+                type: GraphQLString,
+                resolve(subscriber){
+                    return subscriber.id
+                }
+            },
             birthDate: {
                 type: GraphQLString,
                 resolve(subscriber){
@@ -42,13 +48,13 @@ export default new GraphQLObjectType({
                 }
             }, 
             cpf: {
-                type: GraphQLInt,
+                type: GraphQLString,
                 resolve(subscriber){
                     return subscriber.cpf
                 }
             },
             rg: {
-                type: GraphQLInt,
+                type: GraphQLString,
                 resolve(subscriber){
                     return subscriber.rg
                 }
@@ -68,7 +74,7 @@ export default new GraphQLObjectType({
             aditionalData: {
                 type: AditionalData,
                 resolve(subscriber){
-                    return Db.models.subscriberAditionalData.find({
+                    return Db.models.subscriber_aditional_data.find({
                         where: {
                             subscriberId: subscriber.id
                         }
@@ -78,7 +84,7 @@ export default new GraphQLObjectType({
             socioEconomicData: {
                 type: SocioEconomicData,
                 resolve(subscriber){
-                    return Db.models.subscriberSocioEconomicData.find({
+                    return Db.models.subscriber_socio_economic.find({
                         where: {
                             subscriberId: subscriber.id
                         }

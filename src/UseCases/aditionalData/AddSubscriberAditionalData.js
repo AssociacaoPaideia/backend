@@ -17,7 +17,7 @@ const AddSubscriberAditionalData = {
     type: SubscriberAditionalData,
     args: {
         scholarDegree: {
-            type: GraphQLString,
+            type: GraphQLString
         },
         highSchoolYear: {
             type: GraphQLInt,
@@ -29,7 +29,7 @@ const AddSubscriberAditionalData = {
             type: GraphQLBoolean,
         },
         intendedCourse: {
-            type: GraphQLBoolean,
+            type: GraphQLString,
         },
         intendedInstitution: {
             type: GraphQLString,
@@ -41,8 +41,8 @@ const AddSubscriberAditionalData = {
             type: GraphQLInt,
         }   
     },
-    resolver(args){
-        return Db.models.subscriberAditionalData.create(args)
+    resolve(_,args){
+        return Db.models.subscriber_aditional_data.create(args)
     }
 }
 

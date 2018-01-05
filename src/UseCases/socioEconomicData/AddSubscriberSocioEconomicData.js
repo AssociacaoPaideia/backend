@@ -5,11 +5,23 @@ import {
     GraphQLString,
     GraphQLList,
     GraphQLNonNull,
-    GraphQLBoolean
+    GraphQLBoolean,
+    GraphQLEnumType
 } from "graphql";
 import Db from "../../../db.js";
 import SubscriberSocioEconomicData from "../../InputType/SubscriberSocioEconomicData.js"
 import AddSubscriber from "../../UseCases/subscriber/AddSubscriber.js"
+
+const degreeEnum = new GraphQLEnumType({
+    name: "DegreeEnum",
+    values: {
+        FUNDAMENTAL_INCOMPLETE:{}, 
+        FUNDAMENTAL_COMPLETE:{},
+        HIGHSCHOOL_INCOMPLETE:{},
+        SUPERIOR_INCOMPLETE:{},
+        SUPERIOR_COMPLETE:{}
+    }
+})
 
 //Tenho que apenas exportar o schema
 const AddSubscriberAditionalData = {
@@ -30,17 +42,17 @@ const AddSubscriberAditionalData = {
             type: GraphQLBoolean,
         },
         motherDegree: {
-            type: GraphQLString,
+            type: degreeEnum,
         },
         fatherDegree: {
-            type: GraphQLString,
+            type: degreeEnum,
         },
         subscriberId: {
             type: new GraphQLNonNull(GraphQLInt)
         }
     },
-    resolver(args){
-        return Db.models.subscriberSocioEconomicData.create(args)
+    resolve(_, args){
+        return Db.models.subscriber_socio_economic.create(args)
     }
 }
 
