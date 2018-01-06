@@ -22,7 +22,11 @@ export default {
             type: GraphQLInt
         }                    
     },
-    resolve(root, args){
+    resolve(root, args, context){
+        console.log(`[context keys  ] - ${Object.keys(context)}`);
+        console.log(`[context header] - ${(context.headers) ? Object.keys(context.headers) : null}`);
+        console.log(`[context header authorizaton] - ${(context.headers && context.headers.authorization) ? context.headers.authorization : null}`);
+
         return Db.models.subscriber.findAll({where: args});
     }
 };

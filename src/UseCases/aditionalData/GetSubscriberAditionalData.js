@@ -18,10 +18,10 @@ const GetSubscriberAditionalData = {
         },
         userId: {
             type: GraphQLInt
-        }                    
+        }
     },
     resolve(root, args){
-        return Db.models.subscriber.findAll({where: args});
+        return Db.models.subscriber.findAll({where: args, order: [["firstName", "ASC"]]});
     }
 }
 

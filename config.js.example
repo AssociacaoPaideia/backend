@@ -1,0 +1,8 @@
+module.exports = {
+    db_user : "",//Database User
+    db_pwd : "",// Database Password
+    db_host : "",//Database url
+    jwt_secret: "",//JWT secret for encripting your user authentication
+    jwt_email_secret: ""//JWT secret for the email activation
+};
+

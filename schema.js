@@ -12,6 +12,8 @@ import Db from "./db";
 import AddUser from "./src/UseCases/user/AddUser"
 import GetUsers from "./src/UseCases/user/GetUsers.js"
 import Authenticate from "./src/UseCases/user/Authenticate.js"
+import Activate from "./src/UseCases/user/Activate.js"
+import ChangePassword from "./src/UseCases/user/ChangePassword.js"
 
 import AddSubscriber from "./src/UseCases/subscriber/AddSubscriber.js"
 import GetSubscribers from "./src/UseCases/subscriber/GetSubscribers.js"
@@ -42,10 +44,11 @@ const Mutation = new GraphQLObjectType({
     fields(){
         return {
             addUser: AddUser,
+            activate: Activate,
+            changePassword: ChangePassword,
             addSubscriber: AddSubscriber,
             addSocioEconomicData: AddSubscriberSocioEconomicData,
-            addAditionalData: AddSubscriberAditionalData
-            
+            addAditionalData: AddSubscriberAditionalData            
         }
     }
 });

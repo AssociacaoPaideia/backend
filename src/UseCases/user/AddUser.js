@@ -6,6 +6,9 @@ import {
 import Db from "../../../db";
 import User from "../../InputType/User.js"
 import MailSender from "../../Application/MailSender"
+import jwt from "jsonwebtoken";
+import config from "../../../config.js"
+
 
 const AddUser = {
     name: "addUser",
@@ -25,15 +28,21 @@ const AddUser = {
             type: new GraphQLNonNull(GraphQLString)
         }
     },
-    resolve(_, args, context){
-        console.log(`[context keys  ] - ${Object.keys(context)}`);
-        console.log(`[context header] - ${(context.headers) ? Object.keys(context.headers) : null}`);
-        console.log(`[context header authorizaton] - ${(context.headers && context.headers.authorization) ? context.headers.authorization : null}`);
-    
+    resolve(root, args, context, info){
+          
         console.log(args)
-        var user = Db.models.user.create(args); 
-        MailSender.sendMail(args["email"]);
-        return user;
+        return Db.models.user.create(args).then( (user) => {
+            var persistedUser = user.get({plain: true})
+            console.log(persistedUser)
+            var jwtObj = {
+                id: persistedUser.id,
+                email: persistedUser.email
+            }
+            var activationToken = jwt.sign( jwtObj , config.jwt_email_secret) 
+            console.log(activationToken)
+            MailSender.sendActivationMail(persistedUser.email, activationToken);
+            return persistedUser;
+        });
     }
 };
 
