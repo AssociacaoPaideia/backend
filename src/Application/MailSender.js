@@ -43,7 +43,7 @@ function sendMail(recipient, title, mailBodyPlainText, mailBody) {
             from: '"Focus Cursinho " <focus@associacaopaideia.org.br>', // sender address
             to: '"' + recipient + '"', // list of receiver
             subject: title, // Subject line
-            text: plainText, // plain text body
+            text: mailBodyPlainText, // plain text body
             html:  mailBody// html body
         };
     
@@ -70,7 +70,7 @@ export default {
         var replacements = {
             url: "http://associacaopaideia.org.br/ativacao/"+token
         }
-        var plainText = "Olá! Confirmação de cadastro O seu link de ativação da conta é o seguinte: http://associacaopaideia.org.br/ativacao/" + token
+        var plainText = "Olá! Confirmação de cadastro. O seu link de ativação da conta é o seguinte: http://associacaopaideia.org.br/ativacao/" + token
         sendMailFromTemplate(userMail, mailTitle, plainText, htmlPath, replacements);
     },
     sendMail: function(recipient, title, mailBody) {
