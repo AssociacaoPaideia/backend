@@ -1,33 +1,38 @@
 import {
     GraphQLNonNull,
-    GraphQLString
+    GraphQLString,
+    
 } from "graphql";
 
 import Db from "../../../db";
 import User from "../../InputType/User.js"
+import Subscriber from "../../InputType/Subscriber.js"
+import SubscriberAditionalData from "../../InputType/SubscriberAditionalData.js"
+import SubscriberSocioEconomicData from "../../InputType/SubscriberSocioEconomicData.js"
 
-const AddUser = {
+
+const UpdateUser = {
     name: "addUser",
     description: "Adiciona um usuario",
     type: User,
     args: { 
-        firstName: {
+        id: {
             type: new GraphQLNonNull(GraphQLString)
+        },
+        firstName: {
+            type: GraphQLString
         },
         lastName: {
-            type: new GraphQLNonNull(GraphQLString)
+            type: GraphQLString
         },
         email: {
-            type: new GraphQLNonNull(GraphQLString)
-        },
-        password: {
-            type: new GraphQLNonNull(GraphQLString)
+            type: GraphQLString
         }
     },
-    resolver: (args) => {
-        return Db.models.user.create(args);        
+    resolver(_, args){
+        return Db.models.user.update(args, {where: {id: args.id}});        
     }
 };
 
 
-export default AddUser;
+export default UpdateUser;

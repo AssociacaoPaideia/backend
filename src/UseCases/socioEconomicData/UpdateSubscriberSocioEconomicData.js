@@ -14,12 +14,16 @@ import AddSubscriber from "../../UseCases/subscriber/AddSubscriber.js"
 import DegreeEnumType from "./../../InputType/DegreeEnumType.js"
 
 
+
 //Tenho que apenas exportar o schema
-const AddSubscriberAditionalData = {
-    name: "AditionalData",
-    description: "Persists a subscriber aditional data",
+const UpdateSubscriberAditionalData = {
+    name: "UpdateAditionalData",
+    description: "Update a subscriber aditional data",
     type: SubscriberSocioEconomicData,
     args: {
+        id: {
+            type: new GraphQLNonNull(GraphQLString)
+        },
         bruteFamilyIncome: {
             type: GraphQLString,
         },
@@ -37,14 +41,11 @@ const AddSubscriberAditionalData = {
         },
         fatherDegree: {
             type: DegreeEnumType,
-        },
-        subscriberId: {
-            type: new GraphQLNonNull(GraphQLInt)
         }
     },
     resolve(_, args){
-        return Db.models.subscriber_socio_economic.create(args)
+        return Db.models.subscriber_socio_economic.update(args, {where: {id: args.id}})
     }
 }
 
-export default AddSubscriberAditionalData
+export default UpdateSubscriberAditionalData

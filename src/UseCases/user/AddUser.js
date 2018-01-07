@@ -28,8 +28,7 @@ const AddUser = {
             type: new GraphQLNonNull(GraphQLString)
         }
     },
-    resolve(root, args, context, info){
-          
+    resolve(root, args, context, info){          
         console.log(args)
         return Db.models.user.create(args).then( (user) => {
             var persistedUser = user.get({plain: true})
