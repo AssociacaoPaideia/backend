@@ -13,7 +13,8 @@ const Conn = new Sequelize(
     config.db_pwd,
     {
         dialect: "mysql",
-        host: config.db_host
+        host: config.db_host,
+        operatorsAliases: false 
     }
 );
 
