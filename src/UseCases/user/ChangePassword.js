@@ -28,7 +28,6 @@ const ChangePassword =  {
     resolve(root, args) {
         console.log(args)
         var descripted = jwt.decode(args.token, config.jwt_email_secret);
-        console.log(descripted)
         return Db.models.user.update({password : args.newPassword}, {where: {id: descripted.id, email: descripted.email}}).spread((affectedCount, affectedRow) => {            
             return affectedCount == 1;
         });

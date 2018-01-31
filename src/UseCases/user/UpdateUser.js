@@ -30,7 +30,11 @@ const UpdateUser = {
         }
     },
     resolver(_, args){
-        return Db.models.user.update(args, {where: {id: args.id}});        
+        if(context.user || context.user.id === args.id || context.user.isAdmin ) {
+            return Db.models.user.update(args, {where: {id: args.id}});
+        }
+        throw new Error("Não autorizado.");
+          
     }
 };
 
