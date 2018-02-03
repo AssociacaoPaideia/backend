@@ -45,6 +45,9 @@ export default {
         },
     },
     resolve(_, args){
-        return Db.models.subscriber.update(args, {where: {id: args.id}})
+        if(context.user && (context.user.id === args.userId || context.user.isAdmin)) {
+            return Db.models.subscriber.update(args, {where: {id: args.id}});
+        }
+        throw new Error("Não autorizado.");       
     }
 };

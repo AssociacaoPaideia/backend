@@ -24,7 +24,10 @@ const GetUsers =  {
         }
     },
     resolve(root, args) {
-        return Db.models.user.findAll({where: args});
+        if(context.user || context.user.id === args.id || context.user.isAdmin ) {
+            return Db.models.user.findAll({where: args});
+        }
+        throw new Error("Não autorizado.");
     }
 }
 

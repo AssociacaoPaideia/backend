@@ -21,7 +21,10 @@ const GetSubscriberSocioEconomicData = {
         }                    
     },
     resolve(root, args){
-        return Db.models.subscriberSocioEconomicData.findAll({where: args});
+        var subscriber = Db.model.subscriber.find({where: {userId: subscriberId}});
+        if(context.user && ((subscriber && subscriber.userId == context.user.id) || context.user.isAdmin)) 
+            return Db.models.subscriberSocioEconomicData.findAll({where: args});
+        throw new Error("Não autorizado");
     }
 }
 

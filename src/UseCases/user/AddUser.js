@@ -31,7 +31,7 @@ const AddUser = {
     resolve(root, args, context, info){          
         console.log(args)
         return Db.models.user.create(args).then( (user) => {
-            var persistedUser = user.get({plain: true})
+            var persistedUser = user.get({plain: true});
             console.log(persistedUser)
             var jwtObj = {
                 id: persistedUser.id,

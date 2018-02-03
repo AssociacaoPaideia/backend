@@ -15,6 +15,9 @@ export default {
     name: "GetSubscribers",
     description: "Retorna a lista de inscritos.",
     args: {
+        userId: {
+            type: GraphQLInt
+        },
         id: {
             type: GraphQLInt
         },
@@ -23,10 +26,9 @@ export default {
         }                    
     },
     resolve(root, args, context){
-        console.log(`[context keys  ] - ${Object.keys(context)}`);
-        console.log(`[context header] - ${(context.headers) ? Object.keys(context.headers) : null}`);
-        console.log(`[context header authorizaton] - ${(context.headers && context.headers.authorization) ? context.headers.authorization : null}`);
-
-        return Db.models.subscriber.findAll({where: args});
+        if(context.user && (context.user.id === args.userId || context.user.isAdmin)) {
+            return Db.models.user.findAll({where: args});
+        }
+        throw new Error("Não autorizado.");
     }
 };

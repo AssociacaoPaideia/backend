@@ -21,7 +21,10 @@ const GetSubscriberAditionalData = {
         }
     },
     resolve(root, args){
-        return Db.models.subscriber.findAll({where: args, order: [["firstName", "ASC"]]});
+        var subscriber = Db.model.subscriber.find({where: {userId: subscriberId}});
+        if(context.user && ((subscriber && subscriber.userId == context.user.id) || context.user.isAdmin)) 
+            return Db.models.subscriber.findAll({where: args, order: [["firstName", "ASC"]]});
+        throw new Error("Não autorizado.");
     }
 }
 

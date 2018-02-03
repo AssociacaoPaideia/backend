@@ -42,6 +42,9 @@ export default {
         },
     },
     resolve(_, args){
-        return Db.models.subscriber.create(args)
+        if(context.user && (context.user.id === args.userId || context.user.isAdmin)) {
+            return Db.models.subscriber.create(args)
+        }
+        throw new Error("Não autorizado.");
     }
 };

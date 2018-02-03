@@ -43,7 +43,10 @@ const UpdateSubscriberAditionalData = {
         }
     },
     resolve(_,args){
-        return Db.models.subscriber_aditional_data.update(args, {where:{id:args.id}})
+        var subscriber = Db.model.subscriber.find({where: {userId: subscriberId}});
+        if(context.user && ((subscriber && subscriber.userId == context.user.id) || context.user.isAdmin)) 
+            return Db.models.subscriber_aditional_data.update(args, {where:{id:args.id}})
+        throw new Error("Não autorizado.");
     }
 }
 
