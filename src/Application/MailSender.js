@@ -69,9 +69,9 @@ export default {
         var mailTitle = "Ativação da conta";
         var htmlPath = __dirname + "/cadastro.html";
         var replacements = {
-            url: "http://associacaopaideia.org.br/ativacao/"+token
+            url: "http://associacaopaideia.org.br/#/ativacao?token="+token
         }
-        var plainText = "Olá! Confirmação de cadastro. O seu link de ativação da conta é o seguinte: http://associacaopaideia.org.br/ativacao/" + token
+        var plainText = "Olá! Confirmação de cadastro. O seu link de ativação da conta é o seguinte: http://associacaopaideia.org.br/ativacao?token=" + token
         sendMailFromTemplate(userMail, mailTitle, plainText, htmlPath, replacements);
     },
     sendMail: function(recipient, title, mailBody) {
