@@ -7,10 +7,10 @@ import {
     GraphQLNonNull
 } from "graphql";
 
-import Db from "../../../db.js";
+import Db from "../../db.js";
 import { resolve } from "url";
 import jwt from "jsonwebtoken"
-import config from "../../../config.js"
+import config from "../../config.js"
 import User from "../../InputType/User.js"
 
 const AuthObj = new GraphQLObjectType({

@@ -4,7 +4,7 @@ import {
     
 } from "graphql";
 
-import Db from "../../../db";
+import Db from "../../db.js";
 import User from "../../InputType/User.js"
 import Subscriber from "../../InputType/Subscriber.js"
 import SubscriberAditionalData from "../../InputType/SubscriberAditionalData.js"

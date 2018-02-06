@@ -8,7 +8,7 @@ import {
     GraphQLBoolean,
     GraphQLScalarType
 } from "graphql";
-import Db from "../../../db.js";
+import Db from "../../db.js";
 import SubscriberAditionalData from "../../InputType/SubscriberAditionalData"
 
 //Tenho que apenas exportar o schema

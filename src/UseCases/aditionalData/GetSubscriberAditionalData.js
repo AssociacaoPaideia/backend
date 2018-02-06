@@ -6,7 +6,7 @@ import {
     GraphQLList,
     GraphQLNonNull
 } from "graphql";
-import Db from "../../../db.js";
+import Db from "../../db.js";
 import SubscriberAditionalData from "../../InputType/SubscriberAditionalData.js"
 
 const GetSubscriberAditionalData = {

@@ -3,7 +3,7 @@ import { timingSafeEqual } from 'crypto';
 const nodemailer = require('nodemailer');
 const fs = require("fs");
 const handlebars = require("handlebars");
-const config = require("../../config.js")
+const config = require("../config.js")
 
 
 

@@ -7,7 +7,7 @@ import {
     GraphQLNonNull
 } from "graphql";
 
-import Db from "../../../db.js";
+import Db from "../../db.js";
 import User from "../../InputType/User.js"
 
 

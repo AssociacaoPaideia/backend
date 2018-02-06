@@ -6,7 +6,7 @@ import {
     GraphQLList,
     GraphQLNonNull
 } from "graphql";
-import Db from "../../db"
+import Db from "../db"
 import User from "./User.js"
 import AditionalData from "./SubscriberAditionalData.js"
 import SocioEconomicData from "./SubscriberSocioEconomicData.js"

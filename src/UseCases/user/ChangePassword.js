@@ -8,10 +8,10 @@ import {
     GraphQLBoolean
 } from "graphql";
 
-import Db from "../../../db.js";
+import Db from "../../db.js";
 import { resolve } from "url";
 import jwt from "jsonwebtoken";
-import config from "../../../config";
+import config from "../../config";
 
 const ChangePassword =  {
     type: GraphQLBoolean,

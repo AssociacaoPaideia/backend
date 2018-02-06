@@ -8,7 +8,7 @@ import {
     GraphQLBoolean,
     GraphQLEnumType
 } from "graphql";
-import Db from "../../../db.js";
+import Db from "../../db.js";
 import SubscriberSocioEconomicData from "../../InputType/SubscriberSocioEconomicData.js"
 import AddSubscriber from "../../UseCases/subscriber/AddSubscriber.js"
 import DegreeEnumType from "./../../InputType/DegreeEnumType.js"

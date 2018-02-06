@@ -1,10 +1,10 @@
 import Express from "express";
 import GraphHTTP from "express-graphql";
-import Schema from "../schema";
+import Schema from "./schema";
 import graphql from "graphql";
 import jwt from 'express-jwt';
-import db from "../db.js"
-var config = require("../config.js");
+import db from "./db.js"
+var config = require("./config.js");
 var cors = require('cors');
 
 //Configs

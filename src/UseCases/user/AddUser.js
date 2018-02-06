@@ -3,11 +3,11 @@ import {
     GraphQLString
 } from "graphql";
 
-import Db from "../../../db";
+import Db from "../../db.js";
 import User from "../../InputType/User.js"
 import MailSender from "../../Application/MailSender"
 import jwt from "jsonwebtoken";
-import config from "../../../config.js"
+import config from "../../config.js"
 
 
 const AddUser = {

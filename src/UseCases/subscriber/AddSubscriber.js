@@ -7,7 +7,7 @@ import {
     GraphQLNonNull,
     GraphQLBigInt
 } from "graphql";
-import Db from "../../../db.js";
+import Db from "../../db.js";
 import Subscriber from "../../InputType/Subscriber.js"
 
 //Tenho que apenas exportar o schema
