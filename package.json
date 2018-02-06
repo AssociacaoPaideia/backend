@@ -22,7 +22,7 @@
   },
   "homepage": "https://github.com/AssociacaoPaideia/backend#readme",
   "dependencies": {
-    "babel": "^6.23.0",
+    "babel-cli": "^6.26.0",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-preset-node": "^5.1.1",
     "cors": "^2.8.4",
