@@ -8,12 +8,12 @@ console.log(config)
 
 //Entities
 const Conn = new Sequelize(
-    "paideia",
-    config.db_user,
-    config.db_pwd,
+    process.env.DATABASE,
+    process.env.DBUSER,
+    process.env.DBPWD,
     {
         dialect: "mysql",
-        host: config.db_host,
+        host: process.end.DBHOST,
         operatorsAliases: false 
     }
 );
