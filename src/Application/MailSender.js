@@ -3,7 +3,6 @@ import { timingSafeEqual } from 'crypto';
 const nodemailer = require('nodemailer');
 const fs = require("fs");
 const handlebars = require("handlebars");
-const config = require("../config.js")
 
 
 
@@ -32,8 +31,8 @@ function sendMail(recipient, title, mailBodyPlainText, mailBody) {
             port: 465,
             secure: true, // true for 465, false for other ports
             auth: {
-                user: config.mail_user, // generated ethereal user
-                pass: config.mail_pwd  // generated ethereal password
+                user: process.env.MAIL_USER, // generated ethereal user
+                pass: process.env.MAIL_PWD  // generated ethereal password
             }
         });
 

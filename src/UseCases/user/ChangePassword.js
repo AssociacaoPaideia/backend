@@ -11,7 +11,6 @@ import {
 import Db from "../../db.js";
 import { resolve } from "url";
 import jwt from "jsonwebtoken";
-import config from "../../config";
 
 const ChangePassword =  {
     type: GraphQLBoolean,
@@ -27,7 +26,7 @@ const ChangePassword =  {
     },
     resolve(root, args) {
         console.log(args)
-        var descripted = jwt.decode(args.token, config.jwt_email_secret);
+        var descripted = jwt.decode(args.token, process.env.JWT_EMAIL_SECRET);
         return Db.models.user.update({password : args.newPassword}, {where: {id: descripted.id, email: descripted.email}}).spread((affectedCount, affectedRow) => {            
             return affectedCount == 1;
         });

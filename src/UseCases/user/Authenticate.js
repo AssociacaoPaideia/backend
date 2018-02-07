@@ -10,7 +10,6 @@ import {
 import Db from "../../db.js";
 import { resolve } from "url";
 import jwt from "jsonwebtoken"
-import config from "../../config.js"
 import User from "../../InputType/User.js"
 
 const AuthObj = new GraphQLObjectType({
@@ -29,7 +28,7 @@ const AuthObj = new GraphQLObjectType({
                             isActivated: user.isActivated
                         }
                         console.log(user);
-                        return jwt.sign(jwtObj, config.jwt_secret);
+                        return jwt.sign(jwtObj, process.env.JWT_SECRET);
                     }
                     return;
                 }

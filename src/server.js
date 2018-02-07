@@ -4,7 +4,6 @@ import Schema from "./schema";
 import graphql from "graphql";
 import jwt from 'express-jwt';
 import db from "./db.js"
-var config = require("./config.js");
 var cors = require('cors');
 
 //Configs
@@ -16,7 +15,7 @@ const app = Express();
 app.use(cors());
 
 app.post("/graphql",
-    jwt({secret: config.jwt_secret, credentialsRequired: false}),
+    jwt({secret: process.env.JWT_SECRET, credentialsRequired: false}),
     GraphHTTP({
         schema: Schema,
         pretty: true,

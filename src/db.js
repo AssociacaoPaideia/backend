@@ -1,10 +1,6 @@
 import Sequelize from "sequelize";
 import _ from "lodash";
 
-var config = require("./config.js")
-console.log(config)
-
-
 //Entities
 const Conn = new Sequelize(
     process.env.DATABASE,

@@ -7,7 +7,6 @@ import Db from "../../db.js";
 import User from "../../InputType/User.js"
 import MailSender from "../../Application/MailSender"
 import jwt from "jsonwebtoken";
-import config from "../../config.js"
 
 
 const AddUser = {
@@ -37,7 +36,7 @@ const AddUser = {
                 id: persistedUser.id,
                 email: persistedUser.email
             }
-            var activationToken = jwt.sign( jwtObj , config.jwt_email_secret) 
+            var activationToken = jwt.sign( jwtObj , process.env.JWT_EMAIL_SECRET) 
             console.log(activationToken)
             MailSender.sendActivationMail(persistedUser.email, activationToken);
             return persistedUser;
