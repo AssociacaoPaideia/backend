@@ -31,6 +31,6 @@ app.get("/graphql",
 
 
 
-app.listen(APP_PORT, ()=>{
+app.listen(process.env.PORT || APP_PORT, ()=>{
     console.log("Listening on ${APP_PORT}");
 });
