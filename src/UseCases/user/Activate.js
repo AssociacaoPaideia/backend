@@ -24,6 +24,9 @@ const Activate =  {
     resolve(root, args) {
         console.log(args)
         var descripted = jwt.decode(args.token, process.env.JWT_EMAIL_SECRET);
+        if(!descripted){
+            return false;
+        }
         console.log(descripted)
         return Db.models.user.update({isActivated : true}, {where: {id: descripted.id, email: descripted.email}}).spread((affectedCount, affectedRow) => {            
             return affectedCount == 1;  
