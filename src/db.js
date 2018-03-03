@@ -20,7 +20,8 @@ const User = Conn.define("user", {
         allowNull: false,
         validate: {
             isEmail: true
-        }
+        },
+        unique: true,
     },
     password: {
         type: Sequelize.STRING,
@@ -183,6 +184,6 @@ Subscriber.hasOne(SubscriberSocioEconomic);
 SubscriberAditionalData.belongsTo(Subscriber);
 Subscriber.hasOne(SubscriberAditionalData);
 
-Conn.sync({force: true});
+Conn.sync({force: false});
 
 export default Conn;
