@@ -53,7 +53,7 @@ const Authenticate =  {
             type: new GraphQLNonNull(GraphQLString)
         }
     },
-    resolve(root, args) {
+    resolve(root, args, context) {
         console.log(args)
         return Db.models.user.find({where: args});
     }

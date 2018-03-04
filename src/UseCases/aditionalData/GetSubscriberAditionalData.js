@@ -20,7 +20,7 @@ const GetSubscriberAditionalData = {
             type: GraphQLInt
         }
     },
-    resolve(root, args){
+    resolve(root, args, context){
         var subscriber = Db.model.subscriber.find({where: {userId: subscriberId}});
         if(context.user && ((subscriber && subscriber.userId == context.user.id) || context.user.isAdmin)) 
             return Db.models.subscriber.findAll({where: args, order: [["firstName", "ASC"]]});

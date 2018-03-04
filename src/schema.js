@@ -15,6 +15,7 @@ import Authenticate from "./UseCases/user/Authenticate.js"
 import Activate from "./UseCases/user/Activate.js"
 import ChangePassword from "./UseCases/user/ChangePassword.js"
 import UpdateUser from "./UseCases/user/UpdateUser.js"
+import GetAuthenticatedUser from "./UseCases/user/GetAuthenticatedUser.js"
 
 import AddSubscriber from "./UseCases/subscriber/AddSubscriber.js"
 import GetSubscribers from "./UseCases/subscriber/GetSubscribers.js"
@@ -34,6 +35,7 @@ const Query = new GraphQLObjectType({
     fields: () => {
         return {
             users: GetUsers,
+            authenticatedUser: GetAuthenticatedUser,
             subscribers: GetSubscribers,
             subscriberSocioEconomicData: GetSubscriberSocioEconomicData,
             subscriberAditionalData: GetSubscriberAditionalData,

@@ -3,7 +3,8 @@ import GraphHTTP from "express-graphql";
 import Schema from "./schema";
 import graphql from "graphql";
 import jwt from 'express-jwt';
-import db from "./db.js"
+import db from "./db.js";
+import path from 'path';
 var cors = require('cors');
 
 //Configs
@@ -29,7 +30,7 @@ app.get("/graphql",
         graphiql: true
     }));
 
-
+app.use('/files', Express.static(path.join(__dirname, 'files')));
 
 app.listen(process.env.PORT || APP_PORT, ()=>{
     console.log("Listening on ${APP_PORT}");

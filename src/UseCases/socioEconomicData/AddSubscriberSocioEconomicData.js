@@ -42,7 +42,7 @@ const AddSubscriberAditionalData = {
             type: new GraphQLNonNull(GraphQLInt)
         }
     },
-    resolve(_, args){
+    resolve(_, args, context){
         var subscriber = Db.model.subscriber.find({where: {userId: subscriberId}});
         if(context.user && ((subscriber && subscriber.userId == context.user.id) || context.user.isAdmin)) {
             return Db.models.subscriber_socio_economic.create(args);

@@ -24,7 +24,7 @@ const ChangePassword =  {
             type: new GraphQLNonNull(GraphQLString)
         }
     },
-    resolve(root, args) {
+    resolve(root, args, context) {
         console.log(args)
         var descripted = jwt.decode(args.token, process.env.JWT_EMAIL_SECRET);
         return Db.models.user.update({password : args.newPassword}, {where: {id: descripted.id, email: descripted.email}}).spread((affectedCount, affectedRow) => {            

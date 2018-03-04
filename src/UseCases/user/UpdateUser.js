@@ -29,7 +29,7 @@ const UpdateUser = {
             type: GraphQLString
         }
     },
-    resolver(_, args){
+    resolver(_, args, context){
         if(context.user || context.user.id === args.id || context.user.isAdmin ) {
             return Db.models.user.update(args, {where: {id: args.id}});
         }

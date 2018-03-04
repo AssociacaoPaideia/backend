@@ -41,7 +41,7 @@ export default {
             type: GraphQLString
         },
     },
-    resolve(_, args){
+    resolve(_, args, context){
         if(context.user && (context.user.id === args.userId || context.user.isAdmin)) {
             return Db.models.subscriber.create(args)
         }

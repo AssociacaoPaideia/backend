@@ -23,7 +23,7 @@ const GetUsers =  {
             type: GraphQLString
         }
     },
-    resolve(root, args) {
+    resolve(root, args, context) {
         if(context.user || context.user.id === args.id || context.user.isAdmin ) {
             return Db.models.user.findAll({where: args});
         }
