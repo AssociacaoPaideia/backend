@@ -61,7 +61,7 @@ const Subscriber = Conn.define("subscriber", {
         allowNull: false
     },
     citizenCard: {
-        type: Sequelize.STRING,
+        type: Sequelize.TEXT('long'),
         allowNull: false
     }, 
     cpf: {
@@ -72,7 +72,7 @@ const Subscriber = Conn.define("subscriber", {
         }
     },
     rg: {
-        type: Sequelize.STRING,
+        type: Sequelize.TEXT('long'),
         allowNull: false
     },
     photo: {
@@ -184,6 +184,6 @@ Subscriber.hasOne(SubscriberSocioEconomic);
 SubscriberAditionalData.belongsTo(Subscriber);
 Subscriber.hasOne(SubscriberAditionalData);
 
-Conn.sync({force: false});
+Conn.sync({force: true});
 
 export default Conn;
