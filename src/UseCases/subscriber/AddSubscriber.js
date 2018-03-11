@@ -17,31 +17,32 @@ export default {
     type: Subscriber,
     args: {
         birthDate: {
-            type: GraphQLString
+            type: new GraphQLNonNull(GraphQLString)
         },
         birthPlace: {
-            type: GraphQLString
+            type: new GraphQLNonNull(GraphQLString)
         },
         phone: {
-            type: GraphQLString
+            type: new GraphQLNonNull(GraphQLString)
         },
         citizenCard: {
-            type: GraphQLString
+            type: new GraphQLNonNull(GraphQLString)
         }, 
         cpf: {
-            type: GraphQLString
+            type: new GraphQLNonNull(GraphQLString)
         },
         rg: {
-            type: GraphQLString
+            type: new GraphQLNonNull(GraphQLString)
         },
         photo: {
-            type: GraphQLString
+            type: new GraphQLNonNull(GraphQLString)
         },
         userId: {
-            type: GraphQLString
+            type: new GraphQLNonNull(GraphQLInt)
         },
     },
     resolve(_, args, context){
+        console.log(context.user.id === args.userId);
         if(context.user && (context.user.id === args.userId || context.user.isAdmin)) {
             return Db.models.subscriber.create(args)
         }

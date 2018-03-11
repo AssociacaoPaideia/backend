@@ -5,6 +5,7 @@ import graphql from "graphql";
 import jwt from 'express-jwt';
 import db from "./db.js";
 import path from 'path';
+import bodyParser from 'body-parser'
 var cors = require('cors');
 
 //Configs
@@ -13,6 +14,7 @@ const APP_PORT = 3000;
 
 const app = Express();
 
+app.use(bodyParser.json({limit: '2mb'}));
 app.use(cors());
 
 app.post("/graphql",
