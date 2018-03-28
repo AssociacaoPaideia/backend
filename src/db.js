@@ -43,6 +43,11 @@ const User = Conn.define("user", {
         type: Sequelize.BOOLEAN,
         allowNull: false,
         defaultValue: false
+    },
+    isSubscribed: {
+        type: Sequelize.BOOLEAN,
+        allowNull: false,
+        defaultValue: false
     }
 });
 
@@ -184,6 +189,6 @@ Subscriber.hasOne(SubscriberSocioEconomic);
 SubscriberAditionalData.belongsTo(Subscriber);
 Subscriber.hasOne(SubscriberAditionalData);
 
-Conn.sync({force: true});
+Conn.sync({force: false});
 
 export default Conn;

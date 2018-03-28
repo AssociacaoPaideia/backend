@@ -20,6 +20,7 @@ import GetAuthenticatedUser from "./UseCases/user/GetAuthenticatedUser.js"
 import AddSubscriber from "./UseCases/subscriber/AddSubscriber.js"
 import GetSubscribers from "./UseCases/subscriber/GetSubscribers.js"
 import UpdateSubscriber from "./UseCases/subscriber/UpdateSubscriber.js"
+import ValidateSubscription from "./UseCases/subscriber/ValidateSubscription.js";
 
 import AddSubscriberSocioEconomicData from "./UseCases/socioEconomicData/AddSubscriberSocioEconomicData.js"
 import GetSubscriberSocioEconomicData from "./UseCases/socioEconomicData/GetSubscriberSocioEconomicData.js"
@@ -37,6 +38,7 @@ const Query = new GraphQLObjectType({
             users: GetUsers,
             authenticatedUser: GetAuthenticatedUser,
             subscribers: GetSubscribers,
+            validateSubscriber: ValidateSubscription,
             subscriberSocioEconomicData: GetSubscriberSocioEconomicData,
             subscriberAditionalData: GetSubscriberAditionalData,
             authenticate: Authenticate
@@ -58,7 +60,7 @@ const Mutation = new GraphQLObjectType({
             addSocioEconomicData: AddSubscriberSocioEconomicData,
             updateSubscriberSocioEconomicData: UpdateSubscriberSocioEconomicData,
             addAditionalData: AddSubscriberAditionalData,
-            updateSubscriberAditionalData: UpdateSubscriberAditionalData
+            updateSubscriberAditionalData: UpdateSubscriberAditionalData,
         }
     }
 });
