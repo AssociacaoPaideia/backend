@@ -11,6 +11,9 @@ var googleAuth = require('google-auth-library');
 
 function queryOnSheet(sheetId, range){
     return new Promise(function(resolve, reject){
+        console.log(process.env.SERVICEMAIL)
+        console.log(process.env.GSUITKEY)
+        
         var jwtClient = new google.auth.JWT({
             email:  process.env.SERVICEMAIL,
             key: process.env.GSUITKEY,
