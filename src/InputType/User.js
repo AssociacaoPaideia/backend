@@ -4,7 +4,8 @@ import {
     GraphQLInt,
     GraphQLString,
     GraphQLList,
-    GraphQLNonNull
+    GraphQLNonNull,
+    GraphQLBoolean
 } from "graphql";
 
 const User = new GraphQLObjectType({
@@ -36,6 +37,12 @@ const User = new GraphQLObjectType({
                     return person.email;
                 }
             },
+            isSubscribed: {
+                type: GraphQLBoolean,
+                resolve(person){
+                    return person.isSubscribed
+                }
+            }
         }
     }
 });
