@@ -37,9 +37,9 @@ export default {
                         }
                     }).then(result => {
                         var user = result.get({plain: true});
-                        console.log(sheetsResult);
-                        console.log(sheetsResult.includes(user.email));
-                        if(sheetsResult.includes(user.email)){
+                        console.log(sheetsResult.toString());
+                        console.log(sheetsResult.toString().includes(user.email));
+                        if(sheetsResult.toString().includes(user.email)){
                             return Db.models.user.update({isSubscribed : true}, {where: {id: args.userId}}).spread((affectedCount, affectedRow) => {            
                                 return affectedCount == 1;  
                             });
