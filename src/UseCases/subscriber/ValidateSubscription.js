@@ -39,7 +39,7 @@ export default {
                         var user = result.get({plain: true});
                         console.log(sheetsResult[0]);
                         console.log(sheetsResult.includes(user.email));
-                        if(sheetsResult[0].includes(user.email)){
+                        if(sheetsResult.includes(user.email)){
                             return Db.models.user.update({isSubscribed : true}, {where: {id: args.userId}}).spread((affectedCount, affectedRow) => {            
                                 return affectedCount == 1;  
                             });
