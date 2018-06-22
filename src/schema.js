@@ -30,6 +30,9 @@ import AddSubscriberAditionalData from "./UseCases/aditionalData/AddSubscriberAd
 import GetSubscriberAditionalData from "./UseCases/aditionalData/GetSubscriberAditionalData.js"
 import UpdateSubscriberAditionalData from "./UseCases/aditionalData/UpdateSubscriberAditionalData.js"
 
+import IsSubscriptionAvailable from "./UseCases/subscriber/isSubscriptionAvailable"
+import isSubscriptionAvailable from "./UseCases/subscriber/isSubscriptionAvailable";
+
 const Query = new GraphQLObjectType({
     name: "Query",
     description: "This is the root query",
@@ -41,7 +44,8 @@ const Query = new GraphQLObjectType({
             validateSubscriber: ValidateSubscription,
             subscriberSocioEconomicData: GetSubscriberSocioEconomicData,
             subscriberAditionalData: GetSubscriberAditionalData,
-            authenticate: Authenticate
+            authenticate: Authenticate,
+            isSubscriptionAvailable: IsSubscriptionAvailable
         }
     }
 });

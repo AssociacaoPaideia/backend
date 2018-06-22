@@ -189,6 +189,6 @@ Subscriber.hasOne(SubscriberSocioEconomic);
 SubscriberAditionalData.belongsTo(Subscriber);
 Subscriber.hasOne(SubscriberAditionalData);
 
-Conn.sync({force: false});
+Conn.sync({force: true});
 
 export default Conn;

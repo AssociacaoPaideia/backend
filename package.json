@@ -43,6 +43,7 @@
     "mysql2": "^1.5.1",
     "nodemailer": "^4.4.1",
     "nodemon": "^1.14.12",
+    "ntp-client": "^0.5.3",
     "sequelize": "^4.25.1"
   },
   "devDependencies": {

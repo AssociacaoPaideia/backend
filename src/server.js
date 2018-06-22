@@ -35,5 +35,5 @@ app.get("/graphql",
 app.use('/files', Express.static(path.join(__dirname, 'files')));
 
 app.listen(process.env.PORT || APP_PORT, ()=>{
-    console.log("Listening on ${APP_PORT}");
+    console.log("Listening on ${APP_PORT}" + process.env.PORT);
 });
