@@ -65,10 +65,6 @@ const Subscriber = Conn.define("subscriber", {
         type: Sequelize.STRING,
         allowNull: false
     },
-    citizenCard: {
-        type: Sequelize.TEXT('long'),
-        allowNull: false
-    }, 
     cpf: {
         type: Sequelize.STRING,
         allowNull: false,
@@ -79,115 +75,26 @@ const Subscriber = Conn.define("subscriber", {
     rg: {
         type: Sequelize.TEXT('long'),
         allowNull: false
-    },
-    photo: {
-        type: Sequelize.STRING,
-        allowNull: false
     }
 });
 
-
-const schoolTypeArgs = [["PUBLIC","PRIVATE"]];
-const schoolCompletion = [["COMPLETE", "INCOMPLETE", "SUPERIOR"]];
-const SubscriberAditionalData = Conn.define("subscriber_aditional_data",{
-    scholarDegree: {
-        type: Sequelize.STRING,
+const docType = [["RG","CPF", "ADDRESS", "PHOTO", "CITIZEN CARD", "HIGHSCHOOL"]];
+const SubscriberFiles = Conn.define("subscriberFiles", {
+    type: {
+        type: Sequelize.TEXT('long'),
         allowNull: false,
         validate: {
             isIn: {
-               args:  schoolCompletion,
-               msg: "Values must be: " + schoolCompletion
+               args:  docType,
+               msg: "Values must be: " + docType
             }
         }
     },
-    highSchoolYear: {
-        type: Sequelize.INTEGER,
-        allowNull: true
-    },
-    schoolType: {
-        type: Sequelize.STRING,
-        allowNull: false,
-        validate: {
-            isIn: {
-               args:  schoolTypeArgs,
-               msg: "Values must be: " + schoolTypeArgs
-            }
-        }
-    },
-    scholarship: {
-        type: Sequelize.BOOLEAN,
-        allowNull: true        
-    },
-    intendedCourse: {
-        type: Sequelize.STRING,
-        allowNull: false,
-    },
-    intendedInstitution: {
-        type: Sequelize.STRING,
-        allowNull: false
-    },
-    enemGrade: {
-        type: Sequelize.INTEGER,
-        allowNull: true,
-        validate: {
-            isNumeric: true,
-            isInt: true,
-            isValid(value) {
-                if (!(parseInt(value) <= 1000 && parseInt(value) > 0)) {
-                    throw new Error("Nota do enem inválida!")
-                }
-            }
-        }
-    }
-});
-
-const degreeType = [["FUNDAMENTAL_INCOMPLETE", "FUNDAMENTAL_COMPLETE", 
-"HIGHSCHOOL_INCOMPLETE", "HIGHSCHOOL_COMPLETE", "SUPERIOR_INCOMPLETE", "SUPERIOR_COMPLETE"]];
-const SubscriberSocioEconomic = Conn.define("subscriber_socio_economic", {
-    bruteFamilyIncome: {
-        type: Sequelize.STRING,
-        allowNull:  false
-    },
-    isWorking: {
-        type: Sequelize.BOOLEAN,
-        allowNull: false
-    },
-    workingHours: {
-        type: Sequelize.INTEGER,
-        allowNull: true
-    },
-    helpsFinanciallyAtHome: {
-        type: Sequelize.BOOLEAN,
-        allowNull: true
-    },
-    motherDegree: {
-        type: Sequelize.STRING,
-        validate: {
-            isIn: {
-                args: degreeType,
-                msg: "Value must be in: "  + degreeType.length
-            } 
-        },
-        allowNull: true
-    },
-    fatherDegree: {
-        type: Sequelize.STRING,
-        validate: {
-            isIn: {
-                args: degreeType,
-                msg: "Value must be in: "  + degreeType.length
-            } 
-        },
-        allowNull: true
-    }
 });
 
 //Relationships
 Subscriber.belongsTo(User);
-SubscriberSocioEconomic.belongsTo(Subscriber);
-Subscriber.hasOne(SubscriberSocioEconomic);
-SubscriberAditionalData.belongsTo(Subscriber);
-Subscriber.hasOne(SubscriberAditionalData);
+SubscriberFiles.belongsTo(Subscriber);
 
 Conn.sync({force: true});
 

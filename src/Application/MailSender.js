@@ -9,7 +9,7 @@ const handlebars = require("handlebars");
 // Generate test SMTP service account from ethereal.email
 // Only needed if you don't have a real mail account for testing
 
-function sendMailFromTemplate(recipient, title, plainText, path, replacements) {
+function sendMailFromTemplate(recipient, title, plainText, path, replacements, attachment) {
     fs.readFile(path, {encoding: 'utf-8'}, function (err, html) {
         if (err) {
             throw err;
@@ -17,12 +17,12 @@ function sendMailFromTemplate(recipient, title, plainText, path, replacements) {
         else {
             var template = handlebars.compile(html);
             var htmlToSend = template(replacements);
-            sendMail(recipient, title, plainText, htmlToSend);
+            sendMail(recipient, title, plainText, htmlToSend, attachment);
         }
     });
 }
 
-function sendMail(recipient, title, mailBodyPlainText, mailBody) {
+function sendMail(recipient, title, mailBodyPlainText, mailBody, attachment) {
     nodemailer.createTestAccount((err, account) => {
 
         // create reusable transporter object using the default SMTP transport
@@ -44,7 +44,8 @@ function sendMail(recipient, title, mailBodyPlainText, mailBody) {
             to: '"' + recipient + '"', // list of receiver
             subject: title, // Subject line
             text: mailBodyPlainText, // plain text body
-            html:  mailBody// html body
+            html:  mailBody,// html body
+            attachments: attachment
         };
     
         // send mail with defined transport object
@@ -72,6 +73,22 @@ export default {
         }
         var plainText = "Olá! Confirmação de cadastro. O seu link de ativação da conta é o seguinte: http://associacaopaideia.org.br/ativacao?token=" + token
         sendMailFromTemplate(userMail, mailTitle, plainText, htmlPath, replacements);
+    },
+    sendConfirmationMail: function(userMail, name , matricula) {
+        var mailtitle = "Confirmação de matrícula"
+        var htmlPath = __dirname + "/confirmacao.html";
+        var replacements = {
+            name: name,
+            matricula: matricula
+        }
+
+        var plainText = "Olá! Inscrição feita com sucesso. Seu número de matrícula é o seguinte: " + matricula
+        var attachments = [
+            {
+                path: __dirname + "/termo_responsabilidade.pdf"
+            }
+        ]
+        sendMailFromTemplate(userMail, mailtitle, plainText, htmlPath, replacements, attachments)
     },
     sendMail: function(recipient, title, mailBody) {
         sendMail(recipient, title, mailBody);

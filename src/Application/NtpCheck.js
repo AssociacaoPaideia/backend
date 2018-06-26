@@ -9,7 +9,7 @@ function getCurrentTime(server) {
             }
         
             console.log("Current time : ");
-            console.log(date); // Mon Jul 08 2013 21:31:31 GMT+0200 (Paris, Madrid (heure d’été))
+            console.log(date);
             resolve(date)
         });
     });

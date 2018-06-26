@@ -6,6 +6,7 @@ import jwt from 'express-jwt';
 import db from "./db.js";
 import path from 'path';
 import bodyParser from 'body-parser'
+import MailSender from "./Application/MailSender"
 var cors = require('cors');
 
 //Configs

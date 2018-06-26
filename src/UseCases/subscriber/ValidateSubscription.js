@@ -10,6 +10,7 @@ import {
 import Db from "../../db.js";
 import Subscriber from "../../InputType/Subscriber.js"
 import SheetsApi from "../../Application/SheetAPI.js"
+import MailSender from "../../Application/MailSender.js"
 
 
 const formResponseSheet = "1idFPaw1KsDGi3aYf5bHzM0RuNNL57gdx-Nv6J8qVRxg";
@@ -41,7 +42,11 @@ export default {
                         console.log(sheetsResult.toString().includes(user.email));
                         if(sheetsResult.toString().includes(user.email)){
                             return Db.models.user.update({isSubscribed : true}, {where: {id: args.userId}}).spread((affectedCount, affectedRow) => {            
-                                return affectedCount == 1;  
+                                var updated = affectedCount == 1;
+                                if(updated) {''
+                                    MailSender.sendConfirmationMail(user.email, user.name, (user.id + 1697))
+                                }
+                                return affectedCount == 1;
                             });
                         } else {
                             return false;
@@ -50,7 +55,7 @@ export default {
                 })
                 .catch(reason => {                    
                     throw new Error(reason);
-                });
+                }); 
         }
         throw new Error("Não autorizado.");
     }

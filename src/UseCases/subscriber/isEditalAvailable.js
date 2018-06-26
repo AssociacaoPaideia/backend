@@ -10,13 +10,13 @@ import {
 import NtpCheck from "../../Application/NtpCheck.js"
 
 export default {
-    name: "isSubscriptionAvailable",
-    description: "Returns if the the subscription is available",
+    name: "isEditalAvailabe",
+    description: "Returns if the the edital is available",
     type: GraphQLBoolean,
     args: {},
     resolve(_, args, context){
         return NtpCheck.getCurrentTime().then(result => {
-            return result >= new Date("2018-07-02T11:00:00")
+            return  result >= new Date("2018-06-29T11:00:00")
         });
     }
 }

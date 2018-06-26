@@ -22,16 +22,8 @@ import GetSubscribers from "./UseCases/subscriber/GetSubscribers.js"
 import UpdateSubscriber from "./UseCases/subscriber/UpdateSubscriber.js"
 import ValidateSubscription from "./UseCases/subscriber/ValidateSubscription.js";
 
-import AddSubscriberSocioEconomicData from "./UseCases/socioEconomicData/AddSubscriberSocioEconomicData.js"
-import GetSubscriberSocioEconomicData from "./UseCases/socioEconomicData/GetSubscriberSocioEconomicData.js"
-import UpdateSubscriberSocioEconomicData from "./UseCases/socioEconomicData/UpdateSubscriberSocioEconomicData.js"
-
-import AddSubscriberAditionalData from "./UseCases/aditionalData/AddSubscriberAditionalData.js"
-import GetSubscriberAditionalData from "./UseCases/aditionalData/GetSubscriberAditionalData.js"
-import UpdateSubscriberAditionalData from "./UseCases/aditionalData/UpdateSubscriberAditionalData.js"
-
 import IsSubscriptionAvailable from "./UseCases/subscriber/isSubscriptionAvailable"
-import isSubscriptionAvailable from "./UseCases/subscriber/isSubscriptionAvailable";
+import IsEditalAvailable from "./UseCases/subscriber/isEditalAvailable"
 
 const Query = new GraphQLObjectType({
     name: "Query",
@@ -42,10 +34,9 @@ const Query = new GraphQLObjectType({
             authenticatedUser: GetAuthenticatedUser,
             subscribers: GetSubscribers,
             validateSubscriber: ValidateSubscription,
-            subscriberSocioEconomicData: GetSubscriberSocioEconomicData,
-            subscriberAditionalData: GetSubscriberAditionalData,
             authenticate: Authenticate,
-            isSubscriptionAvailable: IsSubscriptionAvailable
+            isSubscriptionAvailable: IsSubscriptionAvailable,
+            isEditalAvailable: IsEditalAvailable
         }
     }
 });
@@ -61,10 +52,6 @@ const Mutation = new GraphQLObjectType({
             updateUser: UpdateUser,
             addSubscriber: AddSubscriber,
             updateSubscriber: UpdateSubscriber,
-            addSocioEconomicData: AddSubscriberSocioEconomicData,
-            updateSubscriberSocioEconomicData: UpdateSubscriberSocioEconomicData,
-            addAditionalData: AddSubscriberAditionalData,
-            updateSubscriberAditionalData: UpdateSubscriberAditionalData,
         }
     }
 });
