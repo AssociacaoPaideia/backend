@@ -16,7 +16,7 @@ export default {
     args: {},
     resolve(_, args, context){
         return NtpCheck.getCurrentTime().then(result => {
-            return  result >= new Date("2018-06-29T15:00:00")
+            return  result >= new Date("2018-06-26T15:00:00")
         });
     }
 }
