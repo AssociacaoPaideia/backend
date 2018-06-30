@@ -78,7 +78,7 @@ const Subscriber = Conn.define("subscriber", {
     }
 });
 
-const docType = [["RG","CPF", "ADDRESS", "PHOTO", "CITIZEN CARD", "HIGHSCHOOL"]];
+const docType = [["RG","CPF", "PARENT_RG", "PARENT_CPF", "TERM_RESP", "HISTORY","SCHOLARSHIP", "EJA", "MEDICAL", "ADDRESS", "PHOTO", "CITIZEN CARD", "HIGHSCHOOL"]];
 const SubscriberFiles = Conn.define("subscriberFiles", {
     type: {
         type: Sequelize.TEXT('long'),

@@ -24,6 +24,7 @@ import ValidateSubscription from "./UseCases/subscriber/ValidateSubscription.js"
 
 import IsSubscriptionAvailable from "./UseCases/subscriber/isSubscriptionAvailable"
 import IsEditalAvailable from "./UseCases/subscriber/isEditalAvailable"
+import AddFiles from "./UseCases/subscriberFiles/AddFiles"
 
 const Query = new GraphQLObjectType({
     name: "Query",
@@ -52,6 +53,7 @@ const Mutation = new GraphQLObjectType({
             updateUser: UpdateUser,
             addSubscriber: AddSubscriber,
             updateSubscriber: UpdateSubscriber,
+            addFiles: AddFiles
         }
     }
 });

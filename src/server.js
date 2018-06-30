@@ -15,7 +15,7 @@ const APP_PORT = 3000;
 
 const app = Express();
 
-app.use(bodyParser.json({limit: '2mb'}));
+app.use(bodyParser.json({limit: '20mb'}));
 app.use(cors());
 
 app.post("/graphql",

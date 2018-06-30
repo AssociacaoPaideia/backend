@@ -24,11 +24,10 @@ export default {
             type: new GraphQLNonNull(GraphQLString)
         },
         subscriberId: {
-            type: new GraphQLNonNull(GraphQLBigInt)
+            type: new GraphQLNonNull(GraphQLInt)
         },
     },
     resolve(_, args, context){
-        console.log(context.user.id === args.userId);
         if(context.user && (context.user.id === args.userId || context.user.isAdmin)) {
             return Db.models.subscriberFiles.create(args)
         }
