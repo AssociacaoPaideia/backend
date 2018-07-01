@@ -90,12 +90,16 @@ const SubscriberFiles = Conn.define("subscriberFiles", {
             }
         }
     },
+    file: {
+        type: Sequelize.TEXT('long'),
+        allowNull: false
+    }
 });
 
 //Relationships
 Subscriber.belongsTo(User);
 SubscriberFiles.belongsTo(Subscriber);
 
-Conn.sync({force: true});
+Conn.sync({force: false});
 
 export default Conn;

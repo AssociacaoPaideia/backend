@@ -25,16 +25,10 @@ export default {
         phone: {
             type: new GraphQLNonNull(GraphQLString)
         },
-        citizenCard: {
-            type: new GraphQLNonNull(GraphQLString)
-        }, 
         cpf: {
             type: new GraphQLNonNull(GraphQLString)
         },
         rg: {
-            type: new GraphQLNonNull(GraphQLString)
-        },
-        photo: {
             type: new GraphQLNonNull(GraphQLString)
         },
         userId: {

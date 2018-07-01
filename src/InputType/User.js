@@ -42,6 +42,12 @@ const User = new GraphQLObjectType({
                 resolve(person){
                     return person.isSubscribed
                 }
+            },
+            isAdmin: {
+                type: GraphQLBoolean,
+                resolve(person){
+                    return person.isAdmin
+                }
             }
         }
     }

@@ -43,7 +43,7 @@ export default {
                         if(sheetsResult.toString().includes(user.email)){
                             return Db.models.user.update({isSubscribed : true}, {where: {id: args.userId}}).spread((affectedCount, affectedRow) => {            
                                 var updated = affectedCount == 1;
-                                if(updated) {''
+                                if(updated) {
                                     MailSender.sendConfirmationMail(user.email, user.name, (user.id + 1697))
                                 }
                                 return affectedCount == 1;
