@@ -38,7 +38,13 @@ export default {
     resolve(_, args, context){
         console.log(context.user.id === args.userId);
         if(context.user && (context.user.id === args.userId || context.user.isAdmin)) {
-            return Db.models.subscriber.create(args)
+            return Db.models.subscriber.findOne({where: {userId: context.user.id}}).then((result) => {
+                if(result){
+                    return result.destroy();
+                }
+            }).then(() => {
+                return Db.models.subscriber.create(args)
+            })
         }
         throw new Error("Não autorizado.");
     }
