@@ -33,7 +33,7 @@ export default {
     },
     resolve(root, args, context){
         if(context.user && (context.user.id === args.userId || context.user.isAdmin)) {
-            return Db.models.subscriber.findAll({where: {isSubscribed: true}});
+            return Db.models.subscriber.findAll({where: {'isSubscribed': 1}});
         }
         throw new Error("Não autorizado.");
     }
