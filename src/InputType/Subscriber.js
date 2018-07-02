@@ -62,35 +62,28 @@ export default new GraphQLObjectType({
             photo: {
                 type: GraphQLString,
                 resolve(subscriber){
-                    return subscriber.photo
+                    return Db.models.subscriberFiles.findOne({
+                        where: {
+                            subscriberId: subscriber.id,
+                            type: "PHOTO"
+                        }
+                    }).then(result => {
+                        var photo = result.get({play: true})
+                        console.log(photo)
+                        return photo.file
+                    })
                 }
             },
             user: {
                 type: User,
                 resolve(subscriber){
-                    return subscriber.getUser();
-                }
-            },
-            aditionalData: {
-                type: AditionalData,
-                resolve(subscriber){
-                    return Db.models.subscriber_aditional_data.find({
+                    return Db.models.user.find({
                         where: {
-                            subscriberId: subscriber.id
+                            id: subscriber.userId
                         }
                     })
                 }
             },
-            socioEconomicData: {
-                type: SocioEconomicData,
-                resolve(subscriber){
-                    return Db.models.subscriber_socio_economic.find({
-                        where: {
-                            subscriberId: subscriber.id
-                        }
-                    })
-                }
-            }
         }
     }
 });

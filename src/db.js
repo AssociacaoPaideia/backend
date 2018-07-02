@@ -48,6 +48,11 @@ const User = Conn.define("user", {
         type: Sequelize.BOOLEAN,
         allowNull: false,
         defaultValue: false
+    },
+    waitList: {
+        type: Sequelize.BOOLEAN,
+        allowNull: false,
+        defaultValue: false
     }
 });
 

@@ -74,9 +74,14 @@ export default {
         var plainText = "Olá! Confirmação de cadastro. O seu link de ativação da conta é o seguinte: https://www.associacaopaideia.org.br/ativacao?token=" + token
         sendMailFromTemplate(userMail, mailTitle, plainText, htmlPath, replacements);
     },
-    sendConfirmationMail: function(userMail, name , matricula) {
-        var mailtitle = "Confirmação de matrícula"
+    sendConfirmationMail: function(userMail, name , matricula, waitlist) {
+
+        var mailtitle = waitlist ? "Confirmação de inscrição - Lista de Espera" : "Confirmação de matrícula"
         var htmlPath = __dirname + "/confirmacao.html";
+
+        if(waitlist) {
+            matricula = matricula + ". Devido ao número de inscritos, você se encontra atualmente na lista de espera."
+        }
         var replacements = {
             name: name,
             matricula: matricula

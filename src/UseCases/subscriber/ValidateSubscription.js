@@ -27,26 +27,31 @@ export default {
         }
     },
     resolve(_, args, context){
-        console.log(context.user.id === args.userId);
         if(context.user && (context.user.id === args.userId || context.user.isAdmin)) {
             return SheetsApi.getSocioEconomicEmails()
                 .then(sheetsResult => {
-                    console.log(sheetsResult);
                     return Db.models.user.findOne({
                         where: {
                             id: args.userId
                         }
                     }).then(result => {
                         var user = result.get({plain: true});
-                        console.log(sheetsResult.toString());
-                        console.log(sheetsResult.toString().includes(user.email));
+                        if(user.isSubscribed) {
+                            return true
+                        }
                         if(sheetsResult.toString().includes(user.email)){
-                            return Db.models.user.update({isSubscribed : true}, {where: {id: args.userId}}).spread((affectedCount, affectedRow) => {            
+                            return Db.models.user.update({isSubscribed : true}, {where: {id: args.userId}}).spread((affectedCount, affectedRow) => {
                                 var updated = affectedCount == 1;
                                 if(updated) {
-                                    MailSender.sendConfirmationMail(user.email, user.name, (user.id + 1697))
+                                    return  Db.models.user.count({where: {'isSubscribed': 1}}).then((result) => {
+                                        if(result > 80) {
+                                            Db.models.user.update({waitList : true}, {where: {id: args.userId}})
+                                        }
+                                        MailSender.sendConfirmationMail(user.email, user.name, (user.id + 1697), result > 80)
+                                        return true
+                                    })
+                                   
                                 }
-                                return affectedCount == 1;
                             });
                         } else {
                             return false;

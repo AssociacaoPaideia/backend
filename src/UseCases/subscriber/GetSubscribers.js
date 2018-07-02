@@ -22,12 +22,18 @@ export default {
             type: GraphQLInt
         },
         cpf: {
-            type: GraphQLInt
-        }                    
+            type: GraphQLString
+        },
+        rg: {
+            type: GraphQLString
+        },
+        name: {
+            type: GraphQLString
+        }
     },
     resolve(root, args, context){
         if(context.user && (context.user.id === args.userId || context.user.isAdmin)) {
-            return Db.models.user.findAll({where: args});
+            return Db.models.subscriber.findAll({where: {isSubscribed: true}});
         }
         throw new Error("Não autorizado.");
     }

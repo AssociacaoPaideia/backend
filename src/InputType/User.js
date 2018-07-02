@@ -48,6 +48,12 @@ const User = new GraphQLObjectType({
                 resolve(person){
                     return person.isAdmin
                 }
+            },
+            waitListed: {
+                type: GraphQLBoolean,
+                resolve(person) {
+                    return person.waitList
+                }
             }
         }
     }
