@@ -29,11 +29,33 @@ export default {
         },
         name: {
             type: GraphQLString
-        }
+        },
     },
     resolve(root, args, context){
         if(context.user && (context.user.id === args.userId || context.user.isAdmin)) {
-            return Db.models.subscriber.findAll();
+            return Db.models.user.findAll({
+                raw:true,
+                attributes: ['id'],
+                where: {
+                    isSubscribed: 1
+                }
+            }).then(result => {
+                console.log(result)
+                var ids = []
+                for (var i = 0; i < result.length; i++) {
+                    var obj = result[i]
+                    console.log(obj)
+                    ids.push(obj.id)
+                }
+                console.log(ids)
+                return Db.models.subscriber.findAll({
+                    where: {
+                        userId: {
+                            [Db.Op.in]: ids
+                        }
+                    }
+                })
+            });
         }
         throw new Error("Não autorizado.");
     }

@@ -80,7 +80,14 @@ const Subscriber = Conn.define("subscriber", {
     rg: {
         type: Sequelize.TEXT('long'),
         allowNull: false
-    }
+    },
+    cartaoCidadao:  {
+        type: Sequelize.STRING,
+        allowNull: false,
+        validate: {
+            isNumeric: true
+        }
+    },
 });
 
 const docType = [["RG","CPF", "PARENT_RG", "PARENT_CPF", "TERM_RESP", "HISTORY","SCHOLARSHIP", "EJA", "MEDICAL", "ADDRESS", "PHOTO", "CITIZEN CARD", "HIGHSCHOOL"]];

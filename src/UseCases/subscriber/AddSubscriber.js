@@ -31,6 +31,9 @@ export default {
         rg: {
             type: new GraphQLNonNull(GraphQLString)
         },
+        cartaoCidadao: {
+            type: new GraphQLNonNull(GraphQLString)
+        },
         userId: {
             type: new GraphQLNonNull(GraphQLInt)
         },

@@ -59,19 +59,10 @@ export default new GraphQLObjectType({
                     return subscriber.rg
                 }
             },
-            photo: {
+            cartaoCidadao: {
                 type: GraphQLString,
-                resolve(subscriber){
-                    return Db.models.subscriberFiles.findOne({
-                        where: {
-                            subscriberId: subscriber.id,
-                            type: "PHOTO"
-                        }
-                    }).then(result => {
-                        var photo = result.get({play: true})
-                        console.log(photo)
-                        return photo.file
-                    })
+                resolve(subscriber) {
+                    return subscriber.cartaoCidadao
                 }
             },
             user: {
