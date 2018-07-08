@@ -25,6 +25,7 @@ import ValidateSubscription from "./UseCases/subscriber/ValidateSubscription.js"
 import IsSubscriptionAvailable from "./UseCases/subscriber/isSubscriptionAvailable"
 import IsEditalAvailable from "./UseCases/subscriber/isEditalAvailable"
 import AddFiles from "./UseCases/subscriberFiles/AddFiles"
+import GetFiles from "./UseCases/subscriberFiles/GetFile"
 
 const Query = new GraphQLObjectType({
     name: "Query",
@@ -37,7 +38,8 @@ const Query = new GraphQLObjectType({
             validateSubscriber: ValidateSubscription,
             authenticate: Authenticate,
             isSubscriptionAvailable: IsSubscriptionAvailable,
-            isEditalAvailable: IsEditalAvailable
+            isEditalAvailable: IsEditalAvailable,
+            getFiles: GetFiles
         }
     }
 });

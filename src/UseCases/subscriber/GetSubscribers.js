@@ -48,12 +48,19 @@ export default {
                     ids.push(obj.id)
                 }
                 console.log(ids)
-                return Db.models.subscriber.findAll({
-                    where: {
+                var whereClause = args.id ?
+                    {
+                        id: args.id,
+                        userId: {
+                            [Db.Op.in]: ids
+                        }
+                    } : {
                         userId: {
                             [Db.Op.in]: ids
                         }
                     }
+                return Db.models.subscriber.findAll({
+                    where: whereClause 
                 })
             });
         }
