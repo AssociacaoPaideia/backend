@@ -9,6 +9,7 @@ import {
 } from "graphql";
 import Db from "../../db.js";
 import Subscriber from "../../InputType/Subscriber.js"
+import { rejects } from "assert";
 
 //Tenho que apenas exportar o schema
 export default {
@@ -40,14 +41,45 @@ export default {
     },
     resolve(_, args, context){
         console.log(context.user.id === args.userId);
+        
         if(context.user && (context.user.id === args.userId || context.user.isAdmin)) {
-            return Db.models.subscriber.findOne({where: {userId: context.user.id}}).then((result) => {
-                if(result){
-                    return result.destroy();
+            return Db.models.subscriber.findOne({
+                where: { [Db.Op.or] : {
+                        rg: args.rg, cpf: args.cpf, cartaoCidadao: args.cartaoCidadao
+                    }
                 }
-            }).then(() => {
-                return Db.models.subscriber.create(args)
+            }).then( (result) => {
+                var subscriber = result.get({plain: true})
+                console.log("#############Achou subscriber: " + subscriber)
+                if(result) {
+                    return Db.models.user.findOne({where: {id: subscriber.userId}}).then((result) => {
+                        
+                        var user = result.get({plain: true})
+                        console.log("##########Achou usuário: " + user)
+                        if(user && !user.isBlackListed){
+                            return Db.models.subscriber.findOne({where: {userId: context.user.id}}).then((result) => {
+                                if(result){
+                                    return result.destroy();
+                                }
+                            }).then(() => {
+                                return Db.models.subscriber.create(args)
+                            })
+                        } else {
+                           throw new Error("Usuário bloqueado para cadastro.");
+                        }
+                    })
+                } else {
+                    return Db.models.subscriber.findOne({where: {userId: context.user.id}}).then((result) => {
+                        if(result){
+                            return result.destroy();
+                        }
+                    }).then(() => {
+                        return Db.models.subscriber.create(args)
+                    })
+                }
+                
             })
+           
         }
         throw new Error("Não autorizado.");
     }

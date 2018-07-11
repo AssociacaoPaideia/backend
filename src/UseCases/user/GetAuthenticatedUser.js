@@ -19,7 +19,7 @@ const GetAuthenticatedUser =  {
     resolve(root, args, context) {
         console.log(context);
         if(context.user) {
-            return Db.models.user.findOne({where: {id: context.user.id}});
+            return Db.models.user.findOne({where: {id: context.user.id, isBlackListed: 0}});
         }
         throw new Error("Não autorizado.");
     }

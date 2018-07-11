@@ -20,7 +20,8 @@ const AuthObj = new GraphQLObjectType({
             token: {
                 type: GraphQLString,
                 resolve(user) {                    
-                    if(user && user.isActivated){
+                    console.log(user.isBlackListed)
+                    if(user && user.isActivated && !user.isBlackListed){
                         var jwtObj = {
                             id: user.id,
                             email: user.email,

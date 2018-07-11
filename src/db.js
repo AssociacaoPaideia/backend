@@ -53,6 +53,11 @@ const User = Conn.define("user", {
         type: Sequelize.BOOLEAN,
         allowNull: false,
         defaultValue: false
+    },
+    isBlackListed: {
+        type: Sequelize.BOOLEAN,
+        allowNull: false,
+        defaultValue: false
     }
 });
 
