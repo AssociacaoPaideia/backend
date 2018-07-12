@@ -49,9 +49,10 @@ export default {
                     }
                 }
             }).then( (result) => {
-                var subscriber = result.get({plain: true})
-                console.log("#############Achou subscriber: " + subscriber)
+                console.log(result)
                 if(result) {
+                    var subscriber = result.get({plain: true})
+                    console.log("#############Achou subscriber: " + subscriber)
                     return Db.models.user.findOne({where: {id: subscriber.userId}}).then((result) => {
                         
                         var user = result.get({plain: true})
@@ -78,6 +79,8 @@ export default {
                     })
                 }
                 
+            }).catch((err) => {
+                console.log(err)
             })
            
         }
