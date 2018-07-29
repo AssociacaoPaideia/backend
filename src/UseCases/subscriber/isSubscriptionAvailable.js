@@ -17,9 +17,9 @@ export default {
     args: {},
     resolve(_, args, context){
         return NtpCheck.getCurrentTime().then(result => {
-            return Db.models.user.count({where: {'isSubscribed': 1}}).then(c => {
+            return Db.models.user.count({where: {'isSubscribed': 1, 'isBlackListed' : 0}}).then(c => {
                 console.log((result >= new Date("2017-07-02T11:00:00") && result <= new Date("2020-07-02T11:00:00") && c < 1))
-                return result >= new Date("2018-07-11T11:00:00") && result <= new Date("2018-07-13T19:59:00") && c < 110;
+                return result >= new Date("2018-08-01T11:00:00") && result <= new Date("2018-08-10T19:59:00") && c < 87;
             })
         });
     }
