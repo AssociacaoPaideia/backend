@@ -44,6 +44,6 @@ function queryOnSheet(sheetId, range){
 
 export default {
     getSocioEconomicEmails: function(){
-        return queryOnSheet("1juluKaJ3U9qHp8eJJktr_eL_E258I47RpbjrGLrCOHI", "Sheet1!B2:B");
+        return queryOnSheet("1_ofjTeSgyI4bb6smNvLkuDYy_clVKv_5_HhxkZSpVqA", "Sheet1!B2:B");
     }
 };
