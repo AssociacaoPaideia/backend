@@ -19,7 +19,7 @@ export default {
         return NtpCheck.getCurrentTime().then(result => {
             return Db.models.user.count({where: {'isSubscribed': 1, 'isBlackListed' : 0}}).then(c => {
                 console.log((result >= new Date("2017-07-02T11:00:00") && result <= new Date("2020-07-02T11:00:00") && c < 1))
-                return result >= new Date("2019-01-15T11:00:00") && result <= new Date("2019-01-24T02:59:00") && c < 100;
+                return result >= new Date("2019-01-15T10:00:00") && result <= new Date("2019-01-24T01:59:00") && c < 100;
             })
         });
     }
