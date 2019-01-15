@@ -95,6 +95,17 @@ export default {
         ]
         sendMailFromTemplate(userMail, mailtitle, plainText, htmlPath, replacements, attachments)
     },
+    sendPasswordRecoveryMail: function(userName, userMail, code) {
+        var mailTitle = "Recuperação de senha";
+        var htmlPath = __dirname + "/code.html";
+        var replacements = {
+            name: userName,
+            code: code
+        }
+        var plainText = "Olá! Você solicitou a recuperação de sua senha: " + code
+        sendMailFromTemplate(userMail, mailTitle, plainText, htmlPath, replacements)
+
+    },
     sendMail: function(recipient, title, mailBody) {
         sendMail(recipient, title, mailBody);
     }

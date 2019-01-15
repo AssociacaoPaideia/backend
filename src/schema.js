@@ -16,6 +16,7 @@ import Activate from "./UseCases/user/Activate.js"
 import ChangePassword from "./UseCases/user/ChangePassword.js"
 import UpdateUser from "./UseCases/user/UpdateUser.js"
 import GetAuthenticatedUser from "./UseCases/user/GetAuthenticatedUser.js"
+import Recover from "./UseCases/user/SendPassword.js"
 
 import AddSubscriber from "./UseCases/subscriber/AddSubscriber.js"
 import GetSubscribers from "./UseCases/subscriber/GetSubscribers.js"
@@ -39,7 +40,8 @@ const Query = new GraphQLObjectType({
             authenticate: Authenticate,
             isSubscriptionAvailable: IsSubscriptionAvailable,
             isEditalAvailable: IsEditalAvailable,
-            getFiles: GetFiles
+            getFiles: GetFiles,
+            recover: Recover
         }
     }
 });
